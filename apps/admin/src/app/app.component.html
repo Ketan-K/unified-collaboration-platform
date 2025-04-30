@@ -1,0 +1,31 @@
+<div class="admin-layout">
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <h1>{{ title }} - Admin</h1>
+    </div>
+    <div class="header-actions">
+      <span class="user-info">Admin User</span>
+      <button class="logout-button">Logout</button>
+    </div>
+  </header>
+
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar">
+    <nav class="nav-menu">
+      <ul>
+        <li *ngFor="let item of navItems">
+          <a [routerLink]="item.route" routerLinkActive="active">
+            <span class="nav-icon">{{ item.icon }}</span>
+            <span class="nav-text">{{ item.name }}</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

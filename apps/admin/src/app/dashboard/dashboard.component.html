@@ -1,0 +1,103 @@
+<div class="dashboard">
+  <h1 class="page-title">Dashboard</h1>
+  
+  <div *ngIf="loading" class="loading">
+    <p>Loading dashboard data...</p>
+  </div>
+  
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && !error" class="dashboard-content">
+    <!-- Time range selector -->
+    <div class="time-range-selector">
+      <span>Time Range:</span>
+      <button [class.active]="timeRange === '7d'" (click)="changeTimeRange('7d')">7 Days</button>
+      <button [class.active]="timeRange === '30d'" (click)="changeTimeRange('30d')">30 Days</button>
+      <button [class.active]="timeRange === '90d'" (click)="changeTimeRange('90d')">90 Days</button>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="stats-cards">
+      <div class="stat-card">
+        <div class="stat-title">Active Rooms</div>
+        <div class="stat-value">{{ stats.activeRooms }}</div>
+        <div class="stat-subtitle">Total: {{ stats.totalRooms }}</div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-title">Active Users</div>
+        <div class="stat-value">{{ stats.activeUsers }}</div>
+        <div class="stat-subtitle">Total: {{ stats.totalUsers }}</div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-title">Storage Used</div>
+        <div class="stat-value">{{ stats.storageUsed }} GB</div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-title">Recordings</div>
+        <div class="stat-value">{{ stats.totalRecordings }}</div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-title">Messages</div>
+        <div class="stat-value">{{ stats.messagesExchanged }}</div>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="charts-container">
+      <div class="chart-card">
+        <h2>User Activity</h2>
+        <div class="chart-wrapper">
+          <canvas baseChart
+            [data]="userActivityChartData"
+            [options]="chartOptions"
+            [type]="'line'">
+          </canvas>
+        </div>
+      </div>
+      
+      <div class="chart-card">
+        <h2>Room Activity</h2>
+        <div class="chart-wrapper">
+          <canvas baseChart
+            [data]="roomActivityChartData"
+            [options]="chartOptions"
+            [type]="'bar'">
+          </canvas>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Recent Activity -->
+    <div class="recent-activity">
+      <h2>Recent Activity</h2>
+      <div class="activity-list">
+        <div class="activity-item">
+          <span class="activity-time">10:42 AM</span>
+          <span class="activity-message">New room "Project Kickoff" created by John Doe</span>
+        </div>
+        <div class="activity-item">
+          <span class="activity-time">09:15 AM</span>
+          <span class="activity-message">User Sarah Smith joined room "Design Review"</span>
+        </div>
+        <div class="activity-item">
+          <span class="activity-time">Yesterday</span>
+          <span class="activity-message">Recording uploaded for room "Weekly Standup"</span>
+        </div>
+        <div class="activity-item">
+          <span class="activity-time">Yesterday</span>
+          <span class="activity-message">User Mike Johnson created account</span>
+        </div>
+        <div class="activity-item">
+          <span class="activity-time">2 days ago</span>
+          <span class="activity-message">Room "Technical Discussion" reached 10 participants</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
